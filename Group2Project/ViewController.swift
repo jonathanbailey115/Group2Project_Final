@@ -15,11 +15,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //array holding the notes
     var models: [(title: String, note: String)] = []
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
+        table.dataSource = self
         title = "Notes"
     }
     
@@ -29,6 +30,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         vc.title = "New Note"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.completion = {noteTitle, note in
+            self.models.append((title: noteTitle,note: note))
+            //hide the label, show the table, reset
+            self.lable.isHidden = true
+            self.table.isHidden = false
+            self.table.reloadData()
+            self.navigationController?.popToRootViewController(animated: true)
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -47,11 +57,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let model = models[indexPath.row]
+        
     //Show note Controller
     guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
             return
     }
+    vc.navigationItem.largeTitleDisplayMode = .never
     vc.title = "Note"
+        vc.noteTitle = model.title
+        vc.note = model.note
     navigationController?.pushViewController(vc,animated: true)
     }
 }

@@ -133,9 +133,40 @@
                     <view key="view" contentMode="scaleToFill" id="jJ1-xV-3nC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb5-qs-gxt">
+                                <rect key="frame" x="10" y="80" width="373" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="ITL-Ng-0xP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KMg-Tv-lCM">
+                                <rect key="frame" x="10" y="150" width="373" height="624"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ypo-Wa-Lg5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ypo-Wa-Lg5" firstAttribute="trailing" secondItem="KMg-Tv-lCM" secondAttribute="trailing" constant="10" id="1U0-Xd-zqs"/>
+                            <constraint firstItem="KMg-Tv-lCM" firstAttribute="top" secondItem="Cb5-qs-gxt" secondAttribute="bottom" constant="10" id="EYJ-Nn-oFU"/>
+                            <constraint firstItem="ypo-Wa-Lg5" firstAttribute="bottom" secondItem="KMg-Tv-lCM" secondAttribute="bottom" constant="10" id="L15-CB-E6C"/>
+                            <constraint firstItem="Cb5-qs-gxt" firstAttribute="leading" secondItem="jJ1-xV-3nC" secondAttribute="leading" constant="10" id="XNH-VY-nFQ"/>
+                            <constraint firstItem="Cb5-qs-gxt" firstAttribute="top" secondItem="jJ1-xV-3nC" secondAttribute="top" constant="80" id="YL5-Bz-eB3"/>
+                            <constraint firstItem="KMg-Tv-lCM" firstAttribute="leading" secondItem="ypo-Wa-Lg5" secondAttribute="leading" constant="10" id="dqQ-oB-4Wl"/>
+                            <constraint firstAttribute="trailing" secondItem="Cb5-qs-gxt" secondAttribute="trailing" constant="10" id="hoJ-eF-hqc"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="noteLabel" destination="KMg-Tv-lCM" id="5J1-4N-qum"/>
+                        <outlet property="titleLabel" destination="Cb5-qs-gxt" id="qY2-lc-aa9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxA-zJ-4dX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
