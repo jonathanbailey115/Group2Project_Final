@@ -42,7 +42,9 @@ class EntryViewController: UIViewController {
      
      @objc func didTapSave() {
          guard let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty else{
-             return}
+             showAlert(message: "Both Title Section and Notes Section need to be filled to save")
+             return
+         }
          showLoadingScreen()
          DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
              guard let self = self else { return }
@@ -52,6 +54,13 @@ class EntryViewController: UIViewController {
          }
          
      }
+    
+    func showAlert(message: String){
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
     
 
     /*
