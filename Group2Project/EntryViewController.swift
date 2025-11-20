@@ -20,11 +20,35 @@ class EntryViewController: UIViewController {
         titleField.becomeFirstResponder()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
 }
-    @objc func didTapSave() {
-        if let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty {
-            completion?(text, noteField.text)
-        }
-    }
+    
+     var loadingView: UIView?
+     
+     func showLoadingScreen(){
+         loadingView = UIView(frame: self.view.bounds)
+         loadingView?.backgroundColor = UIColor(white: 0, alpha: 0.5)
+         let activity = UIActivityIndicatorView(style: .large)
+         activity.center = loadingView!.center
+         activity.startAnimating()
+         loadingView?.addSubview(activity)
+         if let loadingView = loadingView {
+             self.view.addSubview(loadingView)
+         }
+     }
+     
+     func hideLoadingScreen() {
+         loadingView?.removeFromSuperview()
+         loadingView = nil
+     }
+     
+     @objc func didTapSave() {
+         guard let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty else{
+             return}
+         showLoadingScreen()
+         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+             self?.hideLoadingScreen()
+         }
+     }
+    
 
     /*
     // MARK: - Navigation
