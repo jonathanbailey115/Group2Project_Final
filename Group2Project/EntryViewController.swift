@@ -44,9 +44,13 @@ class EntryViewController: UIViewController {
          guard let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty else{
              return}
          showLoadingScreen()
-         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-             self?.hideLoadingScreen()
+         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+             guard let self = self else { return }
+             
+             self.hideLoadingScreen()
+             self.completion?(text, noteField.text)
          }
+         
      }
     
 
